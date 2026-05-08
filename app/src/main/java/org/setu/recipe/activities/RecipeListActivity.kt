@@ -10,10 +10,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.setu.recipe.R
 import org.setu.recipe.adapters.RecipeAdapter
+import org.setu.recipe.adapters.RecipeListener
 import org.setu.recipe.databinding.ActivityRecipeListBinding
 import org.setu.recipe.main.MainApp
+import org.setu.recipe.models.RecipeModel
 
-class RecipeListActivity : AppCompatActivity() {
+class RecipeListActivity : AppCompatActivity(), RecipeListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityRecipeListBinding
@@ -29,7 +31,7 @@ class RecipeListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = RecipeAdapter(app.recipes)
+        binding.recyclerView.adapter = RecipeAdapter(app.recipes.findAll(),this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,9 +53,26 @@ class RecipeListActivity : AppCompatActivity() {
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) {
-            if (it.resultCode == Activity.RESULT_OK) {
+            if (it.resultCode == RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.recipes.size)
+                notifyItemRangeChanged(0,app.recipes.findAll().size)
             }
         }
+
+    override fun onRecipeClick(recipe: RecipeModel) {
+        val launcherIntent = Intent(this, RecipeActivity::class.java)
+        launcherIntent.putExtra("recipe_edit", recipe)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.recipes.findAll().size)
+            }
+        }
+
 }

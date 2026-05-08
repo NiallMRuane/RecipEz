@@ -9,6 +9,7 @@ material = "1.13.0"
 activity = "1.12.4"
 constraintlayout = "2.2.1"
 timber = "1.5.1"
+kotlinPlugin = "2.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,4 +24,5 @@ timber = { module = "com.github.ajalt:timberkt", version.ref = "timber" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlinPlugin" }
 
