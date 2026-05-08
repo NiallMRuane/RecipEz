@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Recipe</string>
+    <string name="button_addRecipe">Add Recipe</string>
+    <string name="hint_recipeTitle">Recipe Title</string>
+    <string name="hint_recipeDescription">Description of recipe </string>
+    <string name="hint_recipeIngredient1">First ingredient </string>
+    <string name="hint_recipeIngredient2">Second ingredient </string>
+    <string name="hint_recipeIngredient3">Third ingredient </string>
+    <string name="hint_recipeCalories">Calories </string>
+    <string name="menu_addRecipe">Add</string>
+    <string name="menu_cancelRecipe">Go back</string>
+</resources>

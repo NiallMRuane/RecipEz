@@ -1,0 +1,20 @@
+package org.setu.recipe.main
+
+import android.app.Application
+import org.setu.recipe.models.RecipeModel
+import timber.log.Timber
+import timber.log.Timber.i
+
+class MainApp : Application() {
+
+    val recipes = ArrayList<RecipeModel>()
+
+    override fun onCreate() {
+        super.onCreate()
+        Timber.plant(Timber.DebugTree())
+        i("Recipe started")
+        //recipes.add(RecipeModel("One", "About one..."))
+        //recipes.add(RecipeModel("Two", "About two..."))
+        //recipes.add(RecipeModel("Three", "About three..."))
+    }
+}
