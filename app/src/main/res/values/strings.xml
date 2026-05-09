@@ -9,4 +9,6 @@
     <string name="hint_recipeCalories">Calories </string>
     <string name="menu_addRecipe">Add</string>
     <string name="menu_cancelRecipe">Go back</string>
+    <string name="enter_recipe_title"> Please enter a Recipe Title </string>
+    <string name="save_recipe"> Save Recipe </string>
 </resources>

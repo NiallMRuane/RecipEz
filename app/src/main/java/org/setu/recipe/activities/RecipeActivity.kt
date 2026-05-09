@@ -9,6 +9,7 @@ import org.setu.recipe.R
 import org.setu.recipe.databinding.ActivityRecipeBinding
 import org.setu.recipe.main.MainApp
 import org.setu.recipe.models.RecipeModel
+import timber.log.Timber
 import timber.log.Timber.i
 
 class RecipeActivity : AppCompatActivity() {
@@ -18,21 +19,23 @@ class RecipeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = "RecipEz"
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
-        i("Recipe Activity started...")
 
         if (intent.hasExtra("recipe_edit")) {
+            edit = true
             recipe = intent.extras?.getParcelable("recipe_edit")!!
             binding.recipeTitle.setText(recipe.title)
             binding.description.setText(recipe.description)
             binding.ingredient1.setText(recipe.ingredient1)
             binding.ingredient2.setText(recipe.ingredient2)
             binding.ingredient3.setText(recipe.ingredient3)
-            binding.calories.setText(recipe.calories)
+            binding.calories.setText(recipe.calories.toString())
+            binding.btnAdd.setText(R.string.save_recipe)
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -43,18 +46,20 @@ class RecipeActivity : AppCompatActivity() {
             recipe.ingredient3 = binding.ingredient3.text.toString()
             recipe.calories = binding.calories.text.toString().toInt()
 
-            if (recipe.title.isNotEmpty()) {
-                app.recipes.create(recipe.copy())
-                i("add Button Pressed: $recipe")
+            if (recipe.title.isEmpty()) {
+                Snackbar.make(it, R.string.enter_recipe_title, Snackbar.LENGTH_LONG)
+                    .show()
+            } else {
+                if (edit) {
+                    app.recipes.update(recipe.copy())
+                } else {
+                    app.recipes.create(recipe.copy())
+                }
+            }
                 setResult(RESULT_OK)
                 finish()
             }
-            else {
-                Snackbar.make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
-                    .show()
-            }
         }
-    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
