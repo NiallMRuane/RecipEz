@@ -8,7 +8,7 @@ import org.setu.recipe.databinding.CardRecipeBinding
 import org.setu.recipe.models.RecipeModel
 
 interface RecipeListener {
-    fun onRecipeClick(recipe: RecipeModel)
+    fun onRecipeClick(recipe: RecipeModel, position: Int)
 }
 
 class RecipeAdapter(private var recipes: List<RecipeModel>,
@@ -37,7 +37,7 @@ class RecipeAdapter(private var recipes: List<RecipeModel>,
             binding.ingredients.text = recipe.ingredients.joinToString("\n")
             binding.calories.text = recipe.calories.toString()
             Picasso.get().load(recipe.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onRecipeClick(recipe) }
+            binding.root.setOnClickListener { listener.onRecipeClick(recipe, adapterPosition) }
         }
     }
 }

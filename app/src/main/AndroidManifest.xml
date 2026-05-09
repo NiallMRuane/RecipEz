@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+
     <application
         android:name="org.setu.recipe.main.MainApp"
         android:allowBackup="true"
@@ -27,5 +30,7 @@
             <meta-data android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
+
 </manifest>

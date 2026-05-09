@@ -12,5 +12,6 @@
     <string name="button_addImage"> Add Image </string>
     <string name="select_recipe_image">Select recipe image</string>
     <string name="change_recipe_image">Change recipe image</string>
+    <string name="menu_deleteRecipe">Delete</string>
 
 </resources>

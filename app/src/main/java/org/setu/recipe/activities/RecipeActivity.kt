@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +20,8 @@ import timber.log.Timber
 import timber.log.Timber.i
 
 class RecipeActivity : AppCompatActivity() {
+
+    var edit = false
     private lateinit var binding: ActivityRecipeBinding
 
     var recipe = RecipeModel()
@@ -26,12 +29,11 @@ class RecipeActivity : AppCompatActivity() {
 
     lateinit var app: MainApp
 
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
         binding = ActivityRecipeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = "RecipEz"
@@ -83,53 +85,61 @@ class RecipeActivity : AppCompatActivity() {
                     app.recipes.create(recipe.copy())
                 }
             }
-                setResult(RESULT_OK)
-                finish()
-            }
+            setResult(RESULT_OK)
+            finish()
+        }
         binding.chooseImage.setOnClickListener {
             i("Select image")
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            val request = PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                .build()
+            imageIntentLauncher.launch(request)
         }
+
         registerImagePickerCallback()
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        if (edit) menu.findItem(R.id.item_delete).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_cancel -> {
+            R.id.item_delete -> {
+                setResult(99)
+                app.recipes.delete(recipe)
                 finish()
             }
+            R.id.item_cancel -> {  finish()  }
         }
         return super.onOptionsItemSelected(item)
     }
 
+
     private fun registerImagePickerCallback() {
-        imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
-                when(result.resultCode){
-                    RESULT_OK -> {
-                        if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            recipe.image = result.data!!.data!!
-                            Picasso.get()
-                                .load(recipe.image)
-                                .into(binding.recipeImage)
-                            binding.chooseImage.setText(R.string.change_recipe_image)
-                        } // end of if
-                    }
-                    RESULT_CANCELED -> { } else -> { }
-                }
+        imageIntentLauncher = registerForActivityResult(
+            ActivityResultContracts.PickVisualMedia()
+        ) {
+            try{
+                contentResolver
+                    .takePersistableUriPermission(it!!,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION )
+                recipe.image = it // The returned Uri
+                i("IMG :: ${recipe.image}")
+                Picasso.get()
+                    .load(recipe.image)
+                    .into(binding.recipeImage)
             }
+            catch(e:Exception){
+                e.printStackTrace()
+            }
+        }
     }
 
 }
