@@ -1,12 +1,18 @@
 package org.setu.recipe.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
 import org.setu.recipe.R
 import org.setu.recipe.databinding.ActivityRecipeBinding
+import org.setu.recipe.helpers.showImagePicker
 import org.setu.recipe.main.MainApp
 import org.setu.recipe.models.RecipeModel
 import timber.log.Timber
@@ -14,8 +20,13 @@ import timber.log.Timber.i
 
 class RecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeBinding
+
     var recipe = RecipeModel()
+
     lateinit var app: MainApp
+
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +35,9 @@ class RecipeActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.toolbarAdd.title = "RecipEz"
         setSupportActionBar(binding.toolbarAdd)
+
         app = application as MainApp
+        i("Recipe Activity started...")
 
         if (intent.hasExtra("recipe_edit")) {
             edit = true
@@ -36,6 +49,12 @@ class RecipeActivity : AppCompatActivity() {
             binding.ingredient3.setText(recipe.ingredient3)
             binding.calories.setText(recipe.calories.toString())
             binding.btnAdd.setText(R.string.save_recipe)
+            Picasso.get()
+                .load(recipe.image)
+                .into(binding.recipeImage)
+            if (recipe.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_recipe_image)
+            }
         }
 
         binding.btnAdd.setOnClickListener() {
@@ -59,7 +78,15 @@ class RecipeActivity : AppCompatActivity() {
                 setResult(RESULT_OK)
                 finish()
             }
+        binding.chooseImage.setOnClickListener {
+            i("Select image")
         }
+
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+        registerImagePickerCallback()
+    }
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -76,4 +103,25 @@ class RecipeActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            recipe.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(recipe.image)
+                                .into(binding.recipeImage)
+                            binding.chooseImage.setText(R.string.change_recipe_image)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
 }

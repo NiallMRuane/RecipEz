@@ -1,5 +1,6 @@
 package org.setu.recipe.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -10,4 +11,6 @@ data class RecipeModel(var id: Long = 0,
                        var ingredient1: String="",
                        var ingredient2: String="",
                        var ingredient3: String="",
-                       var calories: Int=0) : Parcelable
+                       var calories: Int=0,
+                       var image: Uri = Uri.EMPTY) : Parcelable
+
