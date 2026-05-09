@@ -8,9 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class RecipeModel(var id: Long = 0,
                        var title: String ="",
                        var description: String="",
-                       var ingredient1: String="",
-                       var ingredient2: String="",
-                       var ingredient3: String="",
+                       var ingredients: ArrayList<String> = arrayListOf(),
                        var calories: Int=0,
                        var image: Uri = Uri.EMPTY) : Parcelable
 

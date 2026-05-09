@@ -70,11 +70,11 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/ingredient1"
+                    android:id="@+id/ingredients"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_recipeIngredient1"
+                    android:hint="@string/hint_ingredients"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"
@@ -82,32 +82,27 @@
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
 
-
-                <EditText
-                    android:id="@+id/ingredient2"
+                <Button
+                    android:id="@+id/btnAddIngredient"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:padding="8dp"
+                    android:stateListAnimator="@null"
+                    android:text="Add Ingredient"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/ingredientsDisplay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:hint="@string/hint_recipeIngredient2"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/ingredient3"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_margin="8dp"
-                    android:hint="@string/hint_recipeIngredient3"
-                    android:inputType="text"
-                    android:maxLength="25"
-                    android:maxLines="1"
-                    android:padding="8dp"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    tools:text="Ingredients appear here" />
 
                 <EditText
                     android:id="@+id/calories"

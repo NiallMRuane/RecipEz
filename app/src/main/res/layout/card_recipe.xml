@@ -53,7 +53,7 @@
             tools:text="A Description" />
 
         <TextView
-            android:id="@+id/ingredient1"
+            android:id="@+id/ingredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -62,31 +62,7 @@
             app:layout_constraintHorizontal_bias="0.321"
             app:layout_constraintStart_toEndOf="@+id/imageIcon"
             app:layout_constraintTop_toBottomOf="@id/description"
-            tools:text="An ingredient" />
-
-        <TextView
-            android:id="@+id/ingredient2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.321"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
-            app:layout_constraintTop_toBottomOf="@id/ingredient1"
-            tools:text="An ingredient" />
-
-        <TextView
-            android:id="@+id/ingredient3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.321"
-            app:layout_constraintStart_toEndOf="@+id/imageIcon"
-            app:layout_constraintTop_toBottomOf="@id/ingredient2"
-            tools:text="An ingredient" />
+            tools:text="Ingredient" />
 
         <TextView
             android:id="@+id/calories"
@@ -97,7 +73,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.276"
             app:layout_constraintStart_toEndOf="@+id/imageIcon"
-            app:layout_constraintTop_toBottomOf="@id/ingredient3"
+            app:layout_constraintTop_toBottomOf="@id/ingredients"
             tools:text="Calories" />
 
 

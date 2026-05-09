@@ -22,6 +22,7 @@ class RecipeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecipeBinding
 
     var recipe = RecipeModel()
+    val ingredientsList = arrayListOf<String>()
 
     lateinit var app: MainApp
 
@@ -44,9 +45,8 @@ class RecipeActivity : AppCompatActivity() {
             recipe = intent.extras?.getParcelable("recipe_edit")!!
             binding.recipeTitle.setText(recipe.title)
             binding.description.setText(recipe.description)
-            binding.ingredient1.setText(recipe.ingredient1)
-            binding.ingredient2.setText(recipe.ingredient2)
-            binding.ingredient3.setText(recipe.ingredient3)
+            ingredientsList.addAll(recipe.ingredients)
+            binding.ingredientsDisplay.text = ingredientsList.joinToString("\n")
             binding.calories.setText(recipe.calories.toString())
             binding.btnAdd.setText(R.string.save_recipe)
             Picasso.get()
@@ -57,12 +57,20 @@ class RecipeActivity : AppCompatActivity() {
             }
         }
 
+        binding.btnAddIngredient.setOnClickListener {
+            val ingredient = binding.ingredients.text.toString()
+
+            if (ingredient.isNotEmpty()) {
+                ingredientsList.add(ingredient)
+                binding.ingredientsDisplay.text = ingredientsList.joinToString("\n")
+                binding.ingredients.text.clear()
+            }
+        }
+
         binding.btnAdd.setOnClickListener() {
             recipe.title = binding.recipeTitle.text.toString()
             recipe.description = binding.description.text.toString()
-            recipe.ingredient1 = binding.ingredient1.text.toString()
-            recipe.ingredient2 = binding.ingredient2.text.toString()
-            recipe.ingredient3 = binding.ingredient3.text.toString()
+            recipe.ingredients = ingredientsList
             recipe.calories = binding.calories.text.toString().toInt()
 
             if (recipe.title.isEmpty()) {

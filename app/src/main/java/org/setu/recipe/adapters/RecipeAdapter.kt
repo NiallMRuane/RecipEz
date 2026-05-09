@@ -34,9 +34,7 @@ class RecipeAdapter(private var recipes: List<RecipeModel>,
         fun bind(recipe: RecipeModel, listener: RecipeListener) {
             binding.recipeTitle.text = recipe.title
             binding.description.text = recipe.description
-            binding.ingredient1.text = recipe.ingredient1
-            binding.ingredient2.text = recipe.ingredient2
-            binding.ingredient3.text = recipe.ingredient3
+            binding.ingredients.text = recipe.ingredients.joinToString("\n")
             binding.calories.text = recipe.calories.toString()
             Picasso.get().load(recipe.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onRecipeClick(recipe) }
