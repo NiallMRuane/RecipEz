@@ -10,6 +10,7 @@
 
     <item
         android:visible="false"
+        android:icon="@android:drawable/ic_menu_delete"
         android:id="@+id/item_delete"
         android:title="@string/menu_deleteRecipe"
         app:showAsAction="always"/>

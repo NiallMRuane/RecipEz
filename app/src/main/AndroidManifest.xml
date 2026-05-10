@@ -17,12 +17,15 @@
         android:theme="@style/Theme.Recipe"
         tools:targetApi="34">
         <activity
+            android:name=".activities.RecipeListActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.RecipeGalleryActivity"
             android:exported="false"
-            android:theme="@style/Theme.Recipe"
-            android:label="@string/title_activity_recipe_gallery" />
+            android:label="@string/title_activity_recipe_gallery"
+            android:theme="@style/Theme.Recipe" />
         <activity
-            android:name=".activities.RecipeListActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

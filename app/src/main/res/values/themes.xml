@@ -1,22 +1,34 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.Recipe" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <item name="colorPrimary">@color/colorAccent</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+
+        <!-- Main app colours -->
+        <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+
+        <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- App background color. -->
+
+        <!-- Backgrounds -->
         <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorSurface">@color/colorCardBackground</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        <!-- Status/navigation bars -->
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+
+        <!-- Material accents -->
+        <item name="colorAccent">@color/colorAccent</item>
+
     </style>
 
     <style name="Bold">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="Theme.Recipe" parent="Base.Theme.Recipe" />
+
 </resources>
