@@ -181,7 +181,7 @@
                     android:layout_height="160dp"
                     android:layout_margin="16dp"
                     android:importantForAccessibility="no"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
                     app:srcCompat="@mipmap/ic_launcher"
                     tools:ignore="ImageContrastCheck" />
 
