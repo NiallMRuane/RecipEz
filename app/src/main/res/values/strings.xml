@@ -13,5 +13,12 @@
     <string name="select_recipe_image">Select recipe image</string>
     <string name="change_recipe_image">Change recipe image</string>
     <string name="menu_deleteRecipe">Delete</string>
+    <string name="menu_recipeGallery">Gallery</string>
+    <string name="title_activity_recipe_gallery">Recipe Gallery</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 
 </resources>

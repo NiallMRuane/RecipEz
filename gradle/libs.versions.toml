@@ -12,6 +12,8 @@ timber = "1.5.1"
 kotlinPlugin = "2.3.0"
 picasso = "2.71828"
 gson = "2.13.2"
+cardview = "1.0.0"
+recyclerview = "1.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,6 +27,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 timber = { module = "com.github.ajalt:timberkt", version.ref = "timber" }
 picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+androidx-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
+androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

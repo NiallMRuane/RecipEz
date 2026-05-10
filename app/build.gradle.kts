@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.timber)
     implementation(libs.picasso)
     implementation(libs.gson)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
